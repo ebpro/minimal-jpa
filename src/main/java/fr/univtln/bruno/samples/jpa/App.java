@@ -47,7 +47,7 @@ public class App
             try (EntityManager entityManager = emf.createEntityManager()) {
                 entityManager.getTransaction().begin();
                 // Persist a new Customer object in the database
-                entityManager.persist(Customer.of("Pierre"));
+                entityManager.persist(Customer.of("pierre.durand@ici.fr"));
                 // Commit the transaction
                 entityManager.getTransaction().commit();
             }
