@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- The logback.xml file is the configuration file for Logback.
+Logback is a logging framework for Java compatible with SL4J.
+It defines appenders, loggers and layouts. -->
+<configuration>
+    <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder" />
+    <import class="ch.qos.logback.core.ConsoleAppender" />
+
+    <!-- Console appender configuration -->
+    <appender name="STDOUT" class="ConsoleAppender">
+        <encoder class="PatternLayoutEncoder">
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger configurations -->
+    <logger name="org.hibernate.type" level="WARN" />
+    <logger name="org.hibernate" level="WARN" />
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="com.mchange.v2.c3p0" level="WARN" />
+    <logger name="fr.univtln.bruno.samples.jpa" level="DEBUG" />
+
+    <!-- Root logger configuration -->
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

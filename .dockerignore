@@ -1,0 +1,25 @@
+# IntelliJ IDEA files
+.idea
+*.iml
+
+# Maven build directory
+target
+
+# Environment variables file
+.env
+
+# Git files
+.gitignore
+
+# Docker files
+docker-compose.yml
+Dockerfile
+
+# Log files
+*.log
+
+# Temporary files and directories
+*.tmp
+*.bak
+*.swp
+*~

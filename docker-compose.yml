@@ -1,0 +1,60 @@
+version: '3.8'
+
+# The services that make up your app are defined in this section
+services:
+  # The database service
+  db:
+    # The Docker image to use for the database service
+    image: 'postgres:15.2-alpine'
+    # The environment variables for the database service
+    environment:
+        - POSTGRES_DB=${DB_NAME}
+        - POSTGRES_USER=${DB_USERNAME}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+    # The ports to expose for the database service
+    ports:
+      - "5432:5432"
+    # The volumes to mount for the database service
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    # The networks to connect to for the database service
+    networks:
+      - backend
+    # The healthcheck to use for the database service
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready --dbname=${DB_NAME} --username=${DB_USERNAME}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # The restart policy for the database service
+    restart: unless-stopped
+
+  # The app service
+  app:
+    # The Docker image to use for the app service
+    image: 'minimal-jpa:latest'
+    # The build context for the app service
+    build: .
+    # The services that the app service depends on
+    depends_on:
+      db:
+        condition: service_healthy
+    # The environment variables for the app service
+    environment:
+      - DB_NAME=${DB_NAME}
+      - DB_URL=${DB_URL}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    # The networks to connect to for the app service
+    networks:
+      - frontend
+      - backend
+
+# The volumes to define for your app
+volumes:
+  db-data:
+
+# The networks to define for your app
+networks:
+  frontend:
+  backend:
