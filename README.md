@@ -24,7 +24,7 @@ The project is structured as follows:
 ## How to Launch the Project
 
 1. Clone the Git repository.
-2. Launch the application and its associated services using the command `docker-compose up --build`. 
+2. Launch the application and its associated services using the command `docker compose up --build`. 
 
 ## How to develop the project
 
